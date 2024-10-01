@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.coderscampus</groupId>
-	<artifactId>jean-asignment-10</artifactId>
+	<artifactId>jean-assignment-10</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jean-asignment-10</name>
 	<description>Assignment 10 with Spring Boot</description>
@@ -40,7 +40,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
