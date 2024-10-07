@@ -4,23 +4,27 @@ import com.coderscampus.dto.DayResponse;
 import com.coderscampus.dto.WeekResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
+@Service
 public class MealPlannerService {
 
     @Value("${spoonacular.apiKey}")
     private String apiKey;
 
+    @Value("${spoonacular.urls.base}")
+    private String baseUrl;
+
+    @Value("${spoonacular.urls.mealplan}")
+    private String UrlEndpoint;
+
     private final RestTemplate rt = new RestTemplate();
-
-    private final String url;
-
-    public MealPlannerService(String url) {
-        this.url = url;
-    }
 
     public ResponseEntity<WeekResponse> fetchWeekMeals(String numCalories, String diet, String exclusions) {
         URI uri = buildURI("week", numCalories, diet, exclusions);
@@ -33,13 +37,21 @@ public class MealPlannerService {
     }
 
     public URI buildURI(String timeFrame, String numCalories, String diet, String exclusions) {
-        return UriComponentsBuilder.fromHttpUrl(url)
+        UriComponentsBuilder uri = UriComponentsBuilder.fromHttpUrl(baseUrl + UrlEndpoint)
                 .queryParam("apiKey", apiKey)
-                .queryParam("timeFrame", timeFrame)
-                .queryParam("targetCalories", numCalories)
-                .queryParam("diet", diet)
-                .queryParam("exclude", exclusions)
-                .build().toUri();
+                .queryParam("timeFrame", timeFrame);
+
+        if (numCalories != null && !numCalories.isEmpty()) {
+            uri.queryParam("targetCalories", numCalories);
+        }
+        if (diet != null && !diet.isEmpty()) {
+            uri.queryParam("diet", diet);
+        }
+        if (exclusions != null && !exclusions.isEmpty()) {
+            uri.queryParam("exclude", exclusions);
+        }
+        System.out.println(uri);
+        return uri.build().toUri();
     }
 
 }

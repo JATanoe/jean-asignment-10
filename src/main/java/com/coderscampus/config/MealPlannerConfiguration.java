@@ -14,9 +14,9 @@ public class MealPlannerConfiguration {
     @Value("${spoonacular.urls.mealplan}")
     private String UrlEndpoint;
 
-    @Bean
-    public MealPlannerService mealPlanService() {
-        return new MealPlannerService(baseUrl + UrlEndpoint);
-    }
+//    @Bean
+//    public MealPlannerService mealPlanService() {
+//        return new MealPlannerService(baseUrl + UrlEndpoint);
+//    }
 
 }
