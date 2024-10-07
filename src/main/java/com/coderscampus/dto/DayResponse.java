@@ -28,8 +28,4 @@ public class DayResponse {
         this.nutrients = nutrients;
     }
 
-    @Override
-    public String toString() {
-        return "DayResponse [ meals=" + meals + ", nutrients=" + nutrients + " ]";
-    }
 }

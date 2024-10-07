@@ -39,11 +39,4 @@ public class Nutrients {
         this.protein = protein;
     }
 
-    @Override
-    public String toString() {
-        return "Nutrients [ calories=" + calories +
-                ", carbohydrates=" + carbohydrates +
-                ", fat=" + fat + ", protein=" + protein + " ]";
-    }
-
 }

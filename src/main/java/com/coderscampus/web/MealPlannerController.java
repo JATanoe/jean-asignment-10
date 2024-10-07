@@ -3,28 +3,26 @@ package com.coderscampus.web;
 import com.coderscampus.dto.DayResponse;
 import com.coderscampus.dto.WeekResponse;
 import com.coderscampus.service.MealPlannerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class MealPlannerController {
 
-    private final RestTemplate rt = new RestTemplate();
+    private final MealPlannerService mealPlannerService;
 
-    @Autowired
-    private MealPlannerService mealPlannerService;
+    public MealPlannerController(MealPlannerService mealPlannerService) {
+        this.mealPlannerService = mealPlannerService;
+    }
 
     @GetMapping("mealplanner/week")
-    public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam(required = false) String numCalories, @RequestParam(required = false) String diet, @RequestParam(required = false) String exclusions) {
+    public ResponseEntity<WeekResponse> getWeekMeals(String numCalories, String diet, String exclusions) {
         return mealPlannerService.fetchWeekMeals(numCalories, diet, exclusions);
     }
 
     @GetMapping("mealplanner/day")
-    public ResponseEntity<DayResponse> getDayMeals(@RequestParam(required = false) String numCalories, @RequestParam(required = false) String diet, @RequestParam(required = false) String exclusions) {
+    public ResponseEntity<DayResponse> getDayMeals(String numCalories, String diet, String exclusions) {
         return mealPlannerService.fetchDayMeals(numCalories, diet, exclusions);
     }
 

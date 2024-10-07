@@ -17,8 +17,4 @@ public class WeekResponse {
         this.week = week;
     }
 
-    @Override
-    public String toString() {
-        return "WeekResponse [ week=" + week + " ]";
-    }
 }

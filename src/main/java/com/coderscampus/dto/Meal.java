@@ -70,10 +70,4 @@ public class Meal {
         this.sourceUrl = sourceUrl;
     }
 
-    @Override
-    public String toString() {
-        return "Meal [ id=" + id + ", imageType=" + imageType +
-                ", title=" + title + ", readyInMinutes=" + readyInMinutes +
-                ", servings=" + servings + ", sourceUrl=" + sourceUrl + " ]";
-    }
 }
